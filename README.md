@@ -1,14 +1,20 @@
 Dependencies:
+
     pip install keras
+
     pip install spacy
+
 To run:
+
     python classify_reviews.py
 
 Options:
+
     Hyper-parameters are used as constants on the top of the python file.
     They can be changed by modifying them before running.
 
 Description:
+
     This learner uses the positive_reviews.txt and negative_reviews.txt from
     the IMDB reviews dataset to predict if a review is positive or negative.
     It uses the Keras framework for training, and the spaCy framework for
@@ -30,6 +36,7 @@ Description:
     and it's easy of indexing and slicing.
 
 Future Work:
+
     The hyper-parameters could be passed as arguments into the script using 
     argparse. This was not done due to the scope of the project being small.
 
