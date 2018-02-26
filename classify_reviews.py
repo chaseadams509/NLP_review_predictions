@@ -1,4 +1,3 @@
-from __future__ import unicode_literals
 from __future__ import print_function
 import numpy as np
 import spacy
@@ -14,6 +13,8 @@ MAX_REVIEW = 1000 #2500
 NUMBER_WORDS = 8000
 STOP_WORDS = 0#20
 PERCENT_TRAIN = 0.8
+NUM_EPOCHS = 5
+BATCH_SIZE = 128
 
 """ Function to read the positive and negative reviews, 
     and create X, Y dataset.
@@ -122,7 +123,7 @@ def train_model(X, Y, X_test, Y_test):
     model.add(Dense(256, activation='relu'))
     model.add(Dense(1, activation='sigmoid'))
     model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
-    model.fit(X, Y, validation_split=0.2, epochs=5, batch_size=128, verbose=2)
+    model.fit(X, Y, validation_split=0.2, epochs=NUM_EPOCHS, batch_size=BATCH_SIZE, verbose=2)
     # Final evaluation of the model
     _, acc = model.evaluate(X_test, Y_test, verbose=0)
     return acc
@@ -134,6 +135,7 @@ def train_model(X, Y, X_test, Y_test):
 """
 def main():
     X_data, Y_data = read_data()
+    # Removed Keras sequence-based vectorization to use spaCy instead.
     #X_data = vectorize_data(X_data)
     X_data = word2vec_data(X_data)
     X_train, Y_train, X_test, Y_test = split_data(X_data, Y_data)
